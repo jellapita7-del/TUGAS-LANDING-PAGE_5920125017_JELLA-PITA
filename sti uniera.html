@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STI UNIERA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0b1120; 
+      color: #fff; 
+      
+      background-image: url('foto 1.webp'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 17, 32, 0.75); 
+      z-index: -1;
+    }
+
+    header {
+      background: rgba(10, 15, 28, 0.0); 
+      backdrop-filter: blur(10px);      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo-menu {
+      position: relative;
+      display: flex;
+      flex-direction: row;    
+      align-items: center;    
+      gap: 12px;              
+    }
+
+    .logo-img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      text-align: left;        
+      line-height: 1.2;
+    }
+
+    .logo-text .sti {
+      display: block;
+      color: #ffcc00;
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text .univ {
+      display: block;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 400;
+      font-family: Arial, Helvetica, sans-serif; 
+    }
+ 
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffcc00;
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .dropdown-nav {
+      display: none;
+      position: absolute;
+      top: 35px;
+      left: 0;
+      background: #fff;
+      min-width: 240px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: fadeDown 0.3s ease;
+      z-index: 998;
+    }
+
+    .menu-fasilitas.active .dropdown-nav {
+      display: block;
+    }
+
+    .dropdown-nav a {
+      display: block;
+      padding: 12px 20px;
+      color: #1e3c72;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.2s;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-nav a:hover {
+      background: #f0f4ff;
+      padding-left: 28px;
+      color: #1e3c72;
+    }
+
+    .dropdown-nav a::after {
+      display: none;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      background: transparent; 
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      animation: slideUp 0.8s ease;
+      z-index: 1;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8); 
+    }
+
+    .hero h1 span {
+      color: #ffcc00;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #e0e0e0; max-width: 700px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+      animation: slideUp 1s ease;
+      z-index: 1;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 1;
+      animation: slideUp 1.2s ease;
+    }
+
+    .btn-daftar,
+    .btn-fakultas {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-daftar {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(30,60,114,0.6);
+    }
+
+    .btn-daftar:hover {
+      background: linear-gradient(135deg, #ffcc00, #ffb300);
+      color: #1e3c72;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255,204,0,0.5);
+    }
+
+    .btn-fakultas {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 2px solid #ffcc00; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      backdrop-filter: blur(5px);
+    }
+
+    .btn-fakultas:hover {
+      background: #ffcc00;
+      color: #1e3c72;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255,204,0,0.4);
+    }
+
+    .btn-daftar:active,
+    .btn-fakultas:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      nav ul li a {
+        font-size: 14px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .btn-daftar,
+      .btn-fakultas {
+        padding: 14px 30px;
+        font-size: 16px;
+      }
+      .logo-img {
+        width: 45px;
+        height: 45px;
+      }
+      .logo-text .sti {
+        font-size: 13px;
+      }
+      .logo-text .univ {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-menu">
+      <img src="logo sti uniera.jpeg" alt="Logo STI Uniera" class="logo-img">
+      <div class="logo-text">
+        <span class="sti">STI UNIERA</span>
+        <span class="univ">Universitas Halmahera</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Tentang STI</a></li>
+        <li><a href="#">PMB</a></li>
+
+        <li class="menu-fasilitas" id="menuFasilitas">
+          <a href="#" onclick="toggleFasilitas(event)">Fasilitas ▼</a>
+          <div class="dropdown-nav">
+            <a href="#">🏫 Ruang Kelas</a>
+            <a href="#">💻 Laboratorium Komputer</a>
+            <a href="#">📚 Perpustakaan</a>
+            <a href="#">📶 Free WiFi Area</a>
+           </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to <span>STI UNIERA</span></h1>
+    <p>
+      Sistem Dan Teknologi Informasi Universitas Halmahera.
+      Bergabunglah bersama kami untuk mengembangkan kemampuan
+      di bidang Sistem dan Teknologi Informasi dan siap menghadapi era digital.
+    </p>
+    
+
+    <div class="hero-buttons">
+      <button class="btn-daftar" onclick="alert('Form daftar akan segera dibuka!')">
+        Register Now
+      </button>
+      <button class="btn-fakultas" onclick="alert('Menampilkan daftar fakultas...')">
+        See More
+      </button>
+    </div>
+  </section>
+
+  <script>
+    function toggleFasilitas(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.getElementById('menuFasilitas').classList.toggle('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      const menuFasilitas = document.getElementById('menuFasilitas');
+
+      if (!menuFasilitas.contains(e.target)) {
+        menuFasilitas.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
